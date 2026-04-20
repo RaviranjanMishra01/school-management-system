@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon index.js"
   },
-  "author": "Devendra Kumar && Gunjan Kumar",
+  "author": "Raviranjan Kumar",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.1.11"
