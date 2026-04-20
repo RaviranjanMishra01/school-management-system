@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard — CoolManagement</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-light: #4285f4;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --dark-green: #059669;
+      --gray: #6b7280;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 10px 30px rgba(26, 115, 232, 0.12);
+      --radius: 20px;
+      --transition: all 0.3s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: 280px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 32px 24px;
+      box-shadow: 8px 0 30px rgba(26, 115, 232, 0.2);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 48px;
+      letter-spacing: -1px;
+    }
+
+    .user-info {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 16px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 16px;
+    }
+
+    .user-info h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .user-info p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .nav-menu {
+      list-style: none;
+    }
+
+    .nav-menu a {
+      display: flex;
+      align-items: center;
+      padding: 14px 18px;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .nav-menu a i {
+      margin-right: 12px;
+      font-size: 18px;
+    }
+
+    .nav-menu a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateX(8px);
+    }
+
+    .nav-menu .logout {
+      margin-top: auto;
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    .nav-menu .logout:hover {
+      background: #ef4444;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 280px;
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    .header {
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--primary), #3367d6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      color: var(--text-light);
+      font-size: 17px;
+      margin-top: 8px;
+    }
+
+    /* Cards Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 28px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(26, 115, 232, 0.18);
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .class-card {
+      background: linear-gradient(135deg, #f0f7ff, #e0f2fe);
+      border: 2px dashed var(--primary);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+      transition: var(--transition);
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    .btn-small { padding: 8px 14px; font-size: 13px; }
+
+    .btn-blue { background: var(--primary); color: white; }
+    .btn-green { background: var(--success); color: white; }
+    .btn-red { background: var(--danger); color: white; }
+    .btn-dark-green { background: var(--dark-green); color: white; }
+    .btn-gray { background: var(--gray); color: white; }
+    .btn-disabled { background: #94a3b8; color: white; cursor: not-allowed; opacity: 0.7; }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    th {
+      background: var(--primary);
+      color: white;
+      padding: 16px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tr:nth-child(even) {
+      background: #f8faff;
+    }
+
+    tr:hover {
+      background: #edf2ff;
+    }
+
+    .mini-input {
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      width: 120px;
+    }
+
+    .mini-btn {
+      padding: 6px 10px;
+      font-size: 12px;
+      margin: 2px;
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-light);
+      font-style: italic;
+      background: #f8faff;
+      border-radius: 16px;
+    }
+
+    @media (max-width: 992px) {
+      .sidebar {
+        position: fixed;
+        left: -280px;
+        transition: left 0.4s ease;
+        z-index: 1000;
+      }
+      .sidebar.open { left: 0; }
+      .main-content { margin-left: 0; padding: 20px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">CM</div>
+    
+    <div class="user-info">
+      <h3><%= teacher.name %></h3>
+      <p>Teacher Account</p>
+    </div>
+
+    <ul class="nav-menu">
+      <li><a href="/teacher/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+  
+      <li class="logout"><a href="/teacher/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="header">
+      <h1>Welcome back, <%= teacher.name %>!</h1>
+      <p>Manage your classes, students, and attendance from one place</p>
+    </div>
+
+    <!-- Class Teacher Controls -->
+    <% if (classTeacherOf.length > 0) { %>
+    <div class="grid">
+      <% classTeacherOf.forEach(c => { %>
+      <div class="card class-card">
+        <h3>Class <%= c.className %> (ID: <%= c._id %>)</h3>
+        <div class="actions">
+          <a href="/teacher/class/<%= c._id %>/assign-subject-teachers" class="btn btn-blue btn-small">
+            Assign Teachers
+          </a>
+          <a href="/teacher/class/<%= c._id %>/create-student" class="btn btn-green btn-small">
+            Add Student
+          </a>
+
+          <% if (todayTakenForClasses.includes(c._id.toString())) { %>
+            <button class="btn btn-small btn-disabled" disabled>Attendance Taken</button>
+            <small style="color: var(--success); font-weight: bold;">Done for today</small>
+          <% } else { %>
+            <a href="/teacher/class/<%= c._id %>/attendance" class="btn btn-blue btn-small">
+              Take Attendance
+            </a>
+          <% } %>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } %>
+
+    <!-- Assigned Classes -->
+    <div class="card">
+      <h3>Your Assigned Classes</h3>
+      <% if (assignedClasses.length === 0) { %>
+        <p class="no-data">You have not been assigned to any class yet.</p>
+      <% } else { %>
+        <ul class="list">
+          <% assignedClasses.forEach(cls => { %>
+          <li><strong><%= cls.className %></strong> (ID: <%= cls._id %>)</li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+
+    <!-- Students Table -->
+    <% if (students.length > 0 && classTeacherOf.length>=1) { %>
+    <div class="card">
+      <h3>Students in Your Classes</h3>
+      <table class="student-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Suspend Days</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% students.forEach(s => { %>
+          <tr>
+            <td><strong><%= s.name %></strong></td>
+            <td><code><%= s._id %></code></td>
+            <td><%= s.email %></td>
+            <td>
+              <% if (s.remainingDays > 0) { %>
+                <span style="color: var(--danger); font-weight: bold;"><%= s.remainingDays %> days</span>
+              <% } else { %>
+                <span style="color: var(--success);">Active</span>
+              <% } %>
+            </td>
+            <td>
+              <div class="actions">
+                <form action="/teacher/student/update-email/<%= s._id %>" method="POST" style="display:inline;">
+                  <input type="email" name="email" placeholder="New Email" required class="mini-input"/>
+                  <button class="mini-btn btn-blue" type="submit">Update</button>
+                </form>
+                <a class="mini-btn btn-green" href="mailto:<%= s.email %>">Mail</a>
+
+                <% if (s.remainingDays > 0) { %>
+                  <form action="/teacher/student/unsuspend/<%= s._id %>" method="POST" style="display:inline;">
+                    <button class="mini-btn btn-dark-green" type="submit">Unsuspend</button>
+                  </form>
+                <% } else { %>
+                  <form action="/teacher/student/suspend/<%= s._id %>" method="POST" style="display:inline;">
+                    <input type="number" name="days" min="1" placeholder="Days" required class="mini-input"/>
+                    <button class="mini-btn btn-red" type="submit">Suspend</button>
+                  </form>
+                <% } %>
+
+                <form action="/teacher/student/delete/<%= s._id %>" method="POST" onsubmit="return confirm('Permanently delete this student?');" style="display:inline;">
+                  <button class="mini-btn btn-gray" type="submit">Delete</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <% } %>
+
+    <!-- Subjects & Teachers -->
+    <div class="card">
+      <h3>Subjects & Assigned Teachers</h3>
+      <% if(subjectsOfClasses.length > 0) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Subject</th>
+            <th>Assigned Teacher(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% subjectsOfClasses.forEach(s => { %>
+          <tr>
+            <td><%= s.classId?.className || "Unknown" %></td>
+            <td><%= s.subjectName %></td>
+            <td>
+              <%= s.subjectTeachers.length > 0
+                  ? s.subjectTeachers.map(t => t.name).join(", ")
+                  : "No Teacher Assigned" %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } else { %>
+      <p class="no-data">No subjects assigned yet.</p>
+      <% } %>
+    </div>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoolManagement — Modern School Management System</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/styles/nav.css" />
+
+  <link rel="stylesheet" href="/styles/footer.css" />
+
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-light: #4285f4;
+      --primary-dark: #1557b0;
+      --white: #ffffff;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --bg: #f8fafc;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      --radius: 20px;
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary) 0%, #3367d6 100%);
+      color: white;
+      text-align: center;
+      padding: 180px 20px 140px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.12)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L0,320Z"></path></svg>') bottom no-repeat;
+      background-size: cover;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 22px;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      opacity: 0.95;
+      font-weight: 500;
+    }
+
+    /* Primary CTA Button (White on Blue) */
+    .btn-primary {
+      display: inline-block;
+      background: var(--white);
+      color: var(--primary) !important;
+      padding: 18px 48px;
+      border-radius: 50px;
+      font-size: 19px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      background: #f8f9fa;
+    }
+
+    /* Secondary Button (Transparent White Border) */
+    .btn-secondary {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      color: white !important;
+      border: 2.5px solid rgba(255, 255, 255, 0.4);
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 17px;
+      text-decoration: none;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary) !important;
+      transform: translateY(-4px);
+      border-color: white;
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: 120px 20px;
+      text-align: center;
+      background: white;
+    }
+
+    .section-title {
+      font-size: 44px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, var(--primary), #3367d6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: 19px;
+      color: var(--text-light);
+      max-width: 800px;
+      margin: 0 auto 80px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 48px 32px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-16px);
+      box-shadow: 0 30px 60px rgba(26, 115, 232, 0.15);
+      border-color: var(--primary-light);
+    }
+
+    .feature-icon {
+      font-size: 58px;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .feature-card h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .feature-card p {
+      color: var(--text-light);
+      font-size: 16px;
+    }
+
+    /* Final CTA Section */
+    .cta-section {
+      padding: 120px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary) 0%, #3367d6 100%);
+      color: white;
+    }
+
+    .cta-section h2 {
+      font-size: 46px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto 50px;
+      opacity: 0.95;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 42px; }
+      .hero p { font-size: 18px; }
+      .section-title, .cta-section h2 { font-size: 36px; }
+      .btn-primary, .btn-secondary { padding: 16px 36px; font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <%- include("partials/nav") %>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to CoolManagement</h1>
+    <p>The complete, modern, and easy-to-use School Management System trusted by hundreds of schools across India</p>
+    <a href="/school/create" class="btn-primary">
+      Create Your School Free
+    </a>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <h2 class="section-title">Everything Your School Needs</h2>
+    <p class="section-subtitle">Manage teachers, students, attendance, exams, results, and communication — all in one powerful platform</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">Teacher</div>
+        <h3>Teacher Management</h3>
+        <p>Add, assign subjects, track attendance, and manage teacher profiles with ease</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">Student</div>
+        <h3>Student Records</h3>
+        <p>Complete student profiles, class assignment, progress tracking, and parent communication</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">Clipboard</div>
+        <h3>Attendance & Exams</h3>
+        <p>Daily attendance marking, exam scheduling, result publishing, and report cards</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">Bullhorn</div>
+        <h3>Instant Announcements</h3>
+        <p>Send notices, homework, events, and alerts to parents and students instantly</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">Chart</div>
+        <h3>Smart Reports</h3>
+        <p>Beautiful dashboards with attendance trends, performance analytics, and insights</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">Mobile</div>
+        <h3>Mobile Ready</h3>
+        <p>Works perfectly on phones — teachers mark attendance, parents check results on the go</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-section">
+    <h2>Ready to Go Digital?</h2>
+    <p>Join thousands of schools already saving time and reducing paperwork with CoolManagement</p>
+    
+    <div style="margin-top: 40px;">
+      <a href="/school/create" class="btn-primary" style="margin: 0 16px; padding: 20px 56px; font-size: 20px;">
+        Start Free Now
+      </a>
+      <a href="/about" class="btn-secondary" style="margin: 0 16px;">
+        Learn More About Us
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <%- include("partials/footer") %>
+
+  <script src="/scripts/nav.js"></script>
+</body>
+</html>

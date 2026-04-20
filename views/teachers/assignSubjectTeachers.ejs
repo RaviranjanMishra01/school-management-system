@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assign Subject Teachers — CoolManagement</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-light: #4285f4;
+      --success: #10b981;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --card: #ffffff;
+      --shadow: 0 20px 50px rgba(26, 115, 232, 0.15);
+      --radius: 26px;
+      --transition: all 0.4s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #eef2ff 0%, #f0f7ff 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: var(--text);
+    }
+
+    .assign-card {
+      max-width: 680px;
+      margin: 40px auto;
+      background: var(--card);
+      padding: 60px 52px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(26, 115, 232, 0.12);
+      position: relative;
+      overflow: hidden;
+      animation: floatIn 0.9s ease-out;
+    }
+
+    .assign-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 7px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 92px;
+      height: 92px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      font-weight: 900;
+      margin: 0 auto 34px;
+      box-shadow: 0 16px 38px rgba(26, 115, 232, 0.35);
+      letter-spacing: -2px;
+    }
+
+    h2 {
+      font-size: 38px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, var(--primary), #3367d6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .class-banner {
+      text-align: center;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: var(--primary);
+      padding: 20px 28px;
+      border-radius: 20px;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      border: 3px dashed var(--primary);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 17px;
+      margin-bottom: 40px;
+      font-weight: 500;
+    }
+
+    .subject-grid {
+      display: grid;
+      gap: 28px;
+      margin-bottom: 20px;
+    }
+
+    .subject-block {
+      background: #f8faff;
+      padding: 24px;
+      border-radius: 20px;
+      border: 2px solid #e0e7ff;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .subject-block:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.18);
+      border-color: var(--primary);
+    }
+
+    .subject-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 6px;
+      height: 100%;
+      background: var(--primary);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .subject-block:hover::before {
+      opacity: 1;
+    }
+
+    .subject-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    select {
+      width: 100%;
+      padding: 18px 20px;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      font-size: 17px;
+      background: white;
+      color: var(--text);
+      transition: var(--transition);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2364748b' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 5px rgba(26, 115, 232, 0.16);
+      background-color: #f8faff;
+    }
+
+    select option:checked {
+      background: var(--primary);
+      color: white;
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 20px;
+      border: none;
+      border-radius: 18px;
+      font-size: 19px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 12px 35px rgba(26, 115, 232, 0.35);
+      margin-top: 20px;
+    }
+
+    button:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 50px rgba(26, 115, 232, 0.45);
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .back-link a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .assign-card { padding: 48px 32px; margin: 20px; }
+      h2 { font-size: 32px; }
+      .class-banner { font-size: 18px; padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="assign-card">
+    <div class="logo">CM</div>
+
+    <h2>Assign Subject Teachers</h2>
+    
+    <div class="class-banner">
+      Class: <strong><%= classData.className %></strong> (ID: <%= classData._id %>)
+    </div>
+
+    <p class="subtitle">Select a teacher for each subject in this class</p>
+
+    <form action="/teacher/class/<%= classData._id %>/assign-subject-teachers" method="POST">
+      <div class="subject-grid">
+        <% classData.subjects.forEach(sub => { %>
+          <div class="subject-block">
+            <div class="subject-name">
+              <%= sub %>
+            </div>
+            <select name="assignments[<%= sub %>]" required>
+              <option value="">-- Select Teacher --</option>
+              <% teacherList.forEach(t => { %>
+                <option value="<%= t._id %>"><%= t.name %> (ID: <%= t._id %>)</option>
+              <% }) %>
+            </select>
+          </div>
+        <% }) %>
+      </div>
+
+      <button type="submit">
+        Save All Assignments
+      </button>
+    </form>
+
+    <div class="back-link">
+      <a href="javascript:history.back()">Back to Class</a>
+    </div>
+  </div>
+
+</body>
+</html>

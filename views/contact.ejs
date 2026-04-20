@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — CoolManagement</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/styles/nav.css" />
+  <link rel="stylesheet" href="/styles/footer.css" />
+
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-light: #4285f4;
+      --primary-dark: #1557b0;
+      --success: #10b981;
+      --danger: #ef4444;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --radius: 18px;
+      --transition: all 0.3s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* Hero Header */
+    .contact-header {
+      background: linear-gradient(135deg, var(--primary) 0%, #3367d6 100%);
+      color: white;
+      text-align: center;
+      padding: 140px 20px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300"><path d="M0,150 Q300,250 600,150 T1200,150 L1200,300 L0,300 Z" fill="rgba(255,255,255,0.1)"/></svg>') bottom center no-repeat;
+      background-size: cover;
+    }
+
+    .contact-header h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .contact-header p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* Main Contact Section */
+    .contact-container {
+      max-width: 1200px;
+      margin: -60px auto 100px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .contact-info, .contact-form {
+      background: var(--card);
+      padding: 48px 40px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .contact-info h2, .contact-form h2 {
+      font-size: 32px;
+      margin-bottom: 24px;
+      background: linear-gradient(90deg, var(--primary), #3367d6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .contact-info p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: var(--text-light);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .contact-item:last-child { border-bottom: none; }
+
+    .contact-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(26, 115, 232, 0.3);
+    }
+
+    .whatsapp .contact-icon { background: #25d366; }
+
+    .contact-item strong {
+      font-weight: 600;
+      color: var(--text);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .contact-item a {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+
+    .support-note {
+      margin-top: 32px;
+      padding: 20px;
+      background: #f0f9ff;
+      border-radius: 12px;
+      font-size: 15px;
+      color: var(--text-light);
+      border-left: 4px solid var(--primary);
+    }
+
+    /* Contact Form */
+    .contact-form form {
+      display: grid;
+      gap: 20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 16px 18px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 16px;
+      background: #fafafa;
+      transition: var(--transition);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .contact-form button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 8px 25px rgba(26, 115, 232, 0.3);
+    }
+
+    .contact-form button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(26, 115, 232, 0.4);
+    }
+
+    /* Alert Toast (Improved) */
+    .alert {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      min-width: 350px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      color: white;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      z-index: 9999;
+      animation: slideIn 0.4s ease;
+    }
+
+    .alert-success { background: var(--success); }
+    .alert-error { background: var(--danger); }
+
+    .alert .icon { font-size: 24px; }
+    .close-btn {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0.9;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+        margin: -40px 20px 80px;
+      }
+      .contact-header h1 { font-size: 40px; }
+    }
+
+    @media (max-width: 640px) {
+      .contact-info, .contact-form {
+        padding: 32px 24px;
+      }
+      .alert { min-width: auto; left: 20px; right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <%- include("partials/nav") %>
+
+  <!-- Contact Header -->
+  <section class="contact-header">
+    <h1>Contact Us</h1>
+    <p>We’re here 6 days a week to help you get started or solve any issues — fast & friendly support</p>
+  </section>
+
+  <!-- Main Contact Section -->
+  <section class="contact-container">
+
+    <!-- Contact Info -->
+    <div class="contact-info">
+      <h2>Get in Touch</h2>
+
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+        <div>
+          <strong>Call Us</strong>
+          <a href="tel:+919142003626">+91 91420 03626</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <div>
+          <strong>Email Us</strong>
+          <a href="mailto:support@coolmanagement.com">support@coolmanagement.com</a>
+        </div>
+      </div>
+
+      <div class="contact-item whatsapp">
+        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+        <div>
+          <strong>Chat on WhatsApp</strong>
+          <a href="https://wa.me/+919142003626" target="_blank">Message Now (Instant Reply)</a>
+        </div>
+      </div>
+
+      <div class="support-note">
+        <strong>Support Hours:</strong><br>
+        Monday – Saturday: 9:00 AM – 7:00 PM (IST)<br>
+        We usually reply within <strong>30 minutes</strong> on WhatsApp!
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form">
+      <h2>Send Us a Message</h2>
+      <form method="POST" action="/contact/submit">
+        <input type="text" name="name" placeholder="Your Full Name" required minlength="3" />
+        <input type="email" name="email" placeholder="your@email.com" required />
+        <textarea name="message" placeholder="How can we help you today?" rows="6" required minlength="10"></textarea>
+        <button type="submit">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Success/Error Alert -->
+  <% if (form) { %>
+    <% if (submitt) { %>
+      <div class="alert alert-success">
+        <span class="icon">Checkmark</span>
+        <span class="msg">Thank you! Your message has been sent successfully. We'll reply soon!</span>
+        <button class="close-btn" onclick="this.parentElement.remove()">X</button>
+      </div>
+    <% } else { %>
+      <div class="alert alert-error">
+        <span class="icon">Warning</span>
+        <span class="msg">Oops! Something went wrong. Please try again or contact us on WhatsApp.</span>
+        <button class="close-btn" onclick="this.parentElement.remove()">X</button>
+      </div>
+    <% } %>
+  <% } %>
+
+  <!-- Footer -->
+  <%- include("partials/footer") %>
+
+  <script src="/scripts/nav.js"></script>
+</body>
+</html>

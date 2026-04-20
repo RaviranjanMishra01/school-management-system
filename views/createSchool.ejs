@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create School — CoolManagement</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/styles/nav.css" />
+  <link rel="stylesheet" href="/styles/footer.css" />
+
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-light: #4285f4;
+      --primary-dark: #1557b0;
+      --success: #10b981;
+      --danger: #ef4444;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+      --radius: 20px;
+      --transition: all 0.3s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f0f7ff 0%, #e0eafc 100%);
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    /* Hero-style Header */
+    .hero-header {
+      background: linear-gradient(135deg, var(--primary) 0%, #3367d6 100%);
+      color: white;
+      text-align: center;
+      padding: 140px 20px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300"><path d="M0,150 Q300,250 600,150 T1200,150 L1200,300 L0,300 Z" fill="rgba(255,255,255,0.12)"/></svg>') bottom no-repeat;
+      background-size: cover;
+    }
+
+    .hero-header h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .hero-header p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* Form Card */
+    .form-wrapper {
+      max-width: 560px;
+      margin: -80px auto 120px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .form-container {
+      background: var(--card);
+      padding: 48px 40px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      animation: floatIn 0.7s ease-out;
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-container h2 {
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, var(--primary), #3367d6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-container > p {
+      text-align: center;
+      margin-bottom: 32px;
+      font-size: 16px;
+      color: var(--text-light);
+    }
+
+    /* Alert Messages */
+    .success, .error {
+      padding: 14px 20px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      font-weight: 600;
+      text-align: center;
+      animation: fadeIn 0.5s;
+    }
+    .success { background: #dcfce7; color: var(--success); border: 1px solid #86efac; }
+    .error   { background: #fee2e2; color: var(--danger); border: 1px solid #fca5a5; }
+
+    /* Form Styling */
+    form {
+      display: grid;
+      gap: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 16px 18px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 16px;
+      background: #fafafa;
+      transition: var(--transition);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.12);
+    }
+
+    input::placeholder {
+      color: #94a3b8;
+    }
+
+    /* Optional field hint */
+    input[name="schoolId"]::placeholder::after {
+      content: " (optional)";
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    /* Submit Button */
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 18px;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 8px 25px rgba(26, 115, 232, 0.3);
+      margin-top: 12px;
+    }
+
+    button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(26, 115, 232, 0.4);
+    }
+
+    button:active {
+      transform: translateY(-1px);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero-header h1 { font-size: 38px; }
+      .hero-header p { font-size: 18px; }
+      .form-container { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <%- include("partials/nav") %>
+
+  <!-- Hero Header -->
+  <section class="hero-header">
+    <h1>Create Your School</h1>
+    <p>Set up your school in under 2 minutes — completely free to start!</p>
+  </section>
+
+  <!-- Create School Form -->
+  <section class="form-wrapper">
+    <div class="form-container">
+      <h2>Join CoolManagement</h2>
+      <p>Thousands of schools trust us. Your data is safe & secure.</p>
+
+      <!-- Success/Error Message -->
+      <% if (form) { %>
+        <p class="<%= success ? 'success' : 'error' %>">
+          <%= message %>
+        </p>
+      <% } %>
+
+      <form action="/school/create" method="POST" onsubmit="return validatePasswords()">
+        <input type="text" name="schoolName" placeholder="School Name (e.g. St. Mary's School)" required
+               pattern="^[A-Za-z0-9\s.&'-]{3,60}$" title="Enter a valid school name" />
+
+        <input type="email" name="email" placeholder="Principal / Admin Email" required />
+
+        <input type="text" name="schoolId" placeholder="School ID (optional – e.g. SMS2025)" 
+               pattern="^[A-Za-z0-9-]{3,20}$" />
+
+        <input type="number" name="maxStudents" placeholder="Expected Total Students" required min="50" max="50000" />
+
+        <input type="password" id="pwd" name="password" placeholder="Create Password" required minlength="6" />
+
+        <input type="password" id="cpwd" name="confirmPassword" placeholder="Confirm Password" required />
+
+        <button type="submit">
+          Create My School Now
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <%- include("partials/footer") %>
+
+  <script>
+    function validatePasswords() {
+      const p = document.getElementById("pwd").value;
+      const c = document.getElementById("cpwd").value;
+      if (p !== c) {
+        alert("Passwords do not match!");
+        return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>

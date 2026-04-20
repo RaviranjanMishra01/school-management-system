@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verify OTP — CoolManagement</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-light: #4285f4;
+      --primary-dark: #1557b0;
+      --success: #10b981;
+      --danger: #ef4444;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 20px 50px rgba(26, 115, 232, 0.15);
+      --radius: 24px;
+      --transition: all 0.4s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #eef2ff 0%, #f0f7ff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: var(--text);
+    }
+
+    .otp-card {
+      width: 100%;
+      max-width: 480px;
+      background: var(--card);
+      padding: 56px 48px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      border: 1px solid rgba(26, 115, 232, 0.12);
+      position: relative;
+      overflow: hidden;
+      animation: floatIn 0.8s ease-out;
+    }
+
+    .otp-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      font-weight: bold;
+      margin: 0 auto 28px;
+      box-shadow: 0 12px 30px rgba(26, 115, 232, 0.3);
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, var(--primary), #3367d6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .info-text {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 32px;
+    }
+
+    .info-text strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Error Message */
+    .error {
+      background: #fee2e2;
+      color: var(--danger);
+      padding: 14px 20px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      font-weight: 600;
+      border-left: 4px solid var(--danger);
+    }
+
+    form {
+      display: grid;
+      gap: 20px;
+    }
+
+    label {
+      text-align: left;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 18px 20px;
+      border: 2px solid #e2e8f0;
+      border-radius: 14px;
+      font-size: 20px;
+      text-align: center;
+      letter-spacing: 8px;
+      font-weight: 700;
+      background: #fafafa;
+      transition: var(--transition);
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 5px rgba(26, 115, 232, 0.15);
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 18px;
+      border: none;
+      border-radius: 14px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(26, 115, 232, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(26, 115, 232, 0.4);
+    }
+
+    .resend-link {
+      margin-top: 24px;
+      font-size: 15px;
+    }
+
+    .resend-link a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .resend-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .otp-card { padding: 48px 32px; }
+      h2 { font-size: 28px; }
+      input[type="text"] { font-size: 18px; letter-spacing: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="otp-card">
+    <div class="logo">CM</div>
+    
+    <h2>Verify OTP</h2>
+    <p class="info-text">
+      We've sent a 6-digit verification code to<br>
+      <strong><%= email %></strong>
+    </p>
+
+    <% if (message) { %>
+      <div class="error"><%= message %></div>
+    <% } %>
+
+    <form action="/school/forgot-password/verify-otp" method="POST">
+      <input type="hidden" name="email" value="<%= email %>">
+      
+      <label for="otp">Enter 6-digit OTP</label>
+      <input 
+        type="text" 
+        name="otp" 
+        id="otp" 
+        required 
+        maxlength="6" 
+        minlength="6"
+        inputmode="numeric"
+        pattern="[0-9]{6}"
+        placeholder="------"
+        autocomplete="one-time-code"
+      />
+      
+      <button type="submit">
+        Verify & Continue
+      </button>
+    </form>
+
+    <div class="resend-link">
+      Didn't receive the code? 
+      <a href="/school/forgot-password">Resend OTP</a>
+    </div>
+  </div>
+
+  <!-- Auto-focus OTP input -->
+  <script>
+    document.getElementById('otp').focus();
+  </script>
+</body>
+</html>

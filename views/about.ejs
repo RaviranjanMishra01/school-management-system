@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — CoolManagement</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/styles/nav.css" />
+  <link rel="stylesheet" href="/styles/footer.css" />
+
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-light: #4285f4;
+      --primary-dark: #1557b0;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --success: #10b981;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #3367d6 100%);
+      color: white;
+      text-align: center;
+      padding: 140px 20px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300"><path d="M0,100 Q300,200 600,100 T1000,100 L1000,300 L0,300 Z" fill="rgba(255,255,255,0.1)"/></svg>') center bottom no-repeat;
+      background-size: cover;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .hero p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+      font-weight: 500;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 24px;
+      background: linear-gradient(90deg, var(--primary), #3367d6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 18px;
+      color: var(--text-light);
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+
+    /* About Cards Grid */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin: 60px 0;
+    }
+
+    .about-card {
+      background: var(--card);
+      padding: 40px 32px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .about-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(26, 115, 232, 0.15);
+      border-color: var(--primary-light);
+    }
+
+    .about-card i {
+      font-size: 48px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 24px;
+    }
+
+    .about-card h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .about-card p {
+      color: var(--text-light);
+      font-size: 15px;
+    }
+
+    /* Features List */
+    .features {
+      background: white;
+      padding: 80px 20px;
+      margin: 60px 0;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 50px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 14px;
+      transition: var(--transition);
+    }
+
+    .feature-item:hover {
+      background: rgba(26, 115, 232, 0.05);
+      transform: translateX(8px);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(26, 115, 232, 0.3);
+    }
+
+    .feature-content h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .feature-content p {
+      color: var(--text-light);
+      font-size: 15px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, #3367d6 100%);
+      border-radius: var(--radius);
+      margin: 80px 0;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section h2 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      opacity: 0.95;
+    }
+
+    .btn {
+      display: inline-block;
+      background: white;
+      color: var(--primary);
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 18px;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      background: #f8f9fa;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 38px; }
+      .hero p { font-size: 18px; }
+      .section-title { font-size: 32px; }
+      .cta-section h2 { font-size: 32px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <%- include("partials/nav") %>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>About CoolManagement</h1>
+    <p>Empowering educational institutions with modern, intuitive, and powerful school management tools</p>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- Who We Are -->
+    <div class="about-grid">
+      <div class="about-card">
+        <i class="fas fa-users"></i>
+        <h3>Who We Are</h3>
+        <p>CoolManagement is a next-generation School Management Platform built to simplify operations and enhance digital learning experiences for schools across India and beyond.</p>
+      </div>
+      <div class="about-card">
+        <i class="fas fa-bullseye"></i>
+        <h3>Our Mission</h3>
+        <p>To make school administration effortless, transparent, and efficient — so educators can focus on what truly matters: teaching and nurturing students.</p>
+      </div>
+      <div class="about-card">
+        <i class="fas fa-eye"></i>
+        <h3>Our Vision</h3>
+        <p>A world where every school runs smoothly with smart technology, fostering better communication, accountability, and academic excellence.</p>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features">
+      <h2 class="section-title">Why Thousands Trust CoolManagement</h2>
+      <p class="section-subtitle">Everything you need to run a modern, digital-first school — all in one platform</p>
+
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="feature-content">
+            <h4>Super Easy to Use</h4>
+            <p>Intuitive interface designed for teachers, staff, and parents — no training required</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="feature-content">
+            <h4>Bank-Level Security</h4>
+            <p>Secure cloud storage with encryption, backups, and role-based access control</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+          <div class="feature-content">
+            <h4>Mobile Ready</h4>
+            <p>Access from anywhere — teachers mark attendance, parents view results instantly</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+          <div class="feature-content">
+            <h4>Lightning Fast</h4>
+            <p>Built for performance — works smoothly even on low-end devices and slow internet</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fas fa-headset"></i></div>
+          <div class="feature-content">
+            <h4>24/7 Support</h4>
+            <p>Dedicated support team + WhatsApp & call assistance whenever you need</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fas fa-rupee-sign"></i></div>
+          <div class="feature-content">
+            <h4>Affordable Pricing</h4>
+            <p>Transparent plans that grow with your school — no hidden charges</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <div class="cta-section">
+      <h2>Ready to Transform Your School?</h2>
+      <p>Join hundreds of schools already using CoolManagement to save time, reduce paperwork, and focus on education</p>
+      <a href="/school/create" class="btn">
+        <i class="fas fa-rocket"></i> Create Your School Free
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <%- include("partials/footer") %>
+
+  <script src="/scripts/nav.js"></script>
+</body>
+</html>

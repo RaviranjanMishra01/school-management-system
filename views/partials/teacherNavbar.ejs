@@ -1,0 +1,158 @@
+<style>
+  nav {
+    background: #0d6efd;
+    padding: 12px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-left h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-btn {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: .2s;
+    cursor: pointer;
+  }
+
+  .nav-btn:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* Dropdown */
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 38px;
+    left: 0;
+    background: white;
+    color: black;
+    min-width: 180px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    overflow: hidden;
+    z-index: 10;
+  }
+
+  .dropdown a {
+    display: block;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    transition: .2s;
+  }
+
+  .dropdown a:hover {
+    background: #f3f3f3;
+  }
+
+  .nav-item:hover .dropdown {
+    display: block;
+  }
+
+  /* Time – Date box */
+  #datetime {
+    font-size: 14px;
+    opacity: 0.9;
+    text-align: right;
+    line-height: 1.2;
+  }
+</style>
+
+<nav>
+  <div class="nav-left">
+    <h2>Teacher Dashboard</h2>
+  </div>
+
+  <div class="nav-right">
+
+    <!-- LIVE DATE / TIME -->
+    <div id="datetime"></div>
+
+    <!-- CLASS TEACHER MENU -->
+    <% if (classTeacherOf.length > 0) { %>
+      <div class="nav-item">
+        <span class="nav-btn">Class Teacher ▼</span>
+        <div class="dropdown">
+          <% classTeacherOf.forEach(cls => { %>
+
+            <a href="/teacher/class/<%= cls._id %>/add-student">➕ Add Student (<%= cls.className %>)</a>
+
+            <% /* Take attendance hidden on Sunday */ %>
+            <script>
+              const todayIsSunday = new Date().getDay() === 0;
+              if (!todayIsSunday) {
+                document.write(`<a href="/teacher/class/<%= cls._id %>/attendance">📝 Take Attendance (<%= cls.className %>)</a>`);
+              }
+            </script>
+
+          <% }) %>
+        </div>
+      </div>
+    <% } %>
+
+    <!-- ASSIGNMENT MENU (Only if assigned classes exist) -->
+    <% if (assignedClasses.length > 0) { %>
+      <div class="nav-item">
+        <span class="nav-btn">Assignments ▼</span>
+        <div class="dropdown">
+
+          <!-- GIVE ASSIGNMENT CLASS SELECT -->
+          <% assignedClasses.forEach(cls => { %>
+            <a href="/teacher/assignments/give?class=<%= cls._id %>">
+              📘 Give Assignment (<%= cls.className %>)
+            </a>
+          <% }) %>
+
+          <hr>
+
+          <a href="/teacher/assignments/check">📂 Check Assignments</a>
+        </div>
+      </div>
+    <% } %>
+
+    <!-- PROFILE + LOGOUT -->
+    <div class="nav-item">
+      <span class="nav-btn">👤 <%= teacher.name %> ▼</span>
+      <div class="dropdown">
+        <a href="/teacher/profile">Profile</a>
+        <a href="/teacher/logout">Logout</a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<script>
+  // Live time, date, day updater
+  function updateDateTime() {
+    const d = new Date();
+    const options = { weekday: "long" };
+    const day = new Intl.DateTimeFormat("en-IN", options).format(d);
+    const date = d.toLocaleDateString("en-IN");
+    const time = d.toLocaleTimeString("en-IN");
+
+    document.getElementById("datetime").innerHTML =
+      `${day}<br>${date}<br>${time}`;
+  }
+
+  setInterval(updateDateTime, 1000);
+  updateDateTime();
+</script>
