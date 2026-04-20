@@ -1,0 +1,25 @@
+{
+  "name": "school-managment",
+  "version": "1.0.0",
+  "description": "A complete school managment app in node and ejs",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Devendra Kumar && Gunjan Kumar",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.20.0",
+    "nodemailer": "^7.0.10"
+  }
+}
